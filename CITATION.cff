@@ -1,0 +1,18 @@
+cff-version: 1.2.0
+message: "If you use this prototype, please cite it as below."
+title: "GUI State Compression for Computer-Use Agents Using Keyframes and Delta Encoding"
+authors:
+  - family-names: "Tom"
+    given-names: "Saurav"
+date-released: "2026-05-29"
+version: "0.1.0"
+repository-code: "https://github.com/sauravtom/gui-state-compression"
+url: "https://sauravtom.github.io/gui-state-compression/"
+preferred-citation:
+  type: article
+  title: "GUI State Compression for Computer-Use Agents Using Keyframes and Delta Encoding"
+  authors:
+    - family-names: "Tom"
+      given-names: "Saurav"
+  year: 2026
+  notes: "Workshop prototype preprint and code release."

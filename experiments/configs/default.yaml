@@ -1,0 +1,26 @@
+benchmark:
+  name: custom_mini
+  tasks_per_type: 5
+  task_limit:
+
+modes:
+  - full_context
+  - pixel_delta
+  - semantic_delta
+  - hybrid
+
+keyframe_interval: [4]
+history_compression:
+  - state_summary
+
+model: "gpt-5.5"
+max_steps: 30
+seed: 13
+
+model_pricing:
+  input_per_1m: 1.25
+  output_per_1m: 10.0
+
+output_dir: experiments
+task_results_csv: benchmark_results.csv
+summary_csv: summary.csv

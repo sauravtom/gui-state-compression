@@ -1,0 +1,329 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>GUI State Compression for Computer-Use Agents</title>
+    <meta name="description" content="Workshop prototype for keyframe and delta encoding of GUI state in computer-use agents.">
+    <style>
+      :root {
+        color-scheme: light;
+        --ink: #17202a;
+        --muted: #526173;
+        --line: #d9e1ea;
+        --paper: #ffffff;
+        --soft: #f5f7fa;
+        --accent: #0b6bcb;
+        --green: #21845b;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        color: var(--ink);
+        background: var(--paper);
+        line-height: 1.55;
+      }
+
+      header {
+        border-bottom: 1px solid var(--line);
+        background: var(--soft);
+      }
+
+      nav,
+      main,
+      footer {
+        max-width: 1080px;
+        margin: 0 auto;
+        padding: 0 24px;
+      }
+
+      nav {
+        min-height: 58px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+      }
+
+      nav a,
+      .link {
+        color: var(--accent);
+        text-decoration: none;
+        font-weight: 650;
+      }
+
+      .hero {
+        max-width: 1080px;
+        margin: 0 auto;
+        padding: 64px 24px 54px;
+      }
+
+      h1 {
+        max-width: 880px;
+        margin: 0 0 18px;
+        font-size: clamp(34px, 5vw, 62px);
+        line-height: 1.02;
+        letter-spacing: 0;
+      }
+
+      h2 {
+        margin: 44px 0 14px;
+        font-size: 26px;
+      }
+
+      p {
+        max-width: 850px;
+      }
+
+      .subtitle {
+        max-width: 820px;
+        font-size: 20px;
+        color: var(--muted);
+      }
+
+      .actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        margin-top: 28px;
+      }
+
+      .button {
+        display: inline-flex;
+        min-height: 42px;
+        align-items: center;
+        justify-content: center;
+        padding: 0 16px;
+        border: 1px solid var(--accent);
+        border-radius: 6px;
+        background: var(--accent);
+        color: #fff;
+        text-decoration: none;
+        font-weight: 700;
+      }
+
+      .button.secondary {
+        background: #fff;
+        color: var(--accent);
+      }
+
+      .metrics {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 14px;
+        margin: 30px 0 10px;
+      }
+
+      .metric {
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        padding: 18px;
+        background: #fff;
+      }
+
+      .metric strong {
+        display: block;
+        font-size: 28px;
+        line-height: 1.1;
+        color: var(--green);
+      }
+
+      .metric span {
+        display: block;
+        margin-top: 8px;
+        color: var(--muted);
+        font-size: 14px;
+      }
+
+      .figures {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 18px;
+      }
+
+      figure {
+        margin: 0;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        overflow: hidden;
+        background: #fff;
+      }
+
+      figure img {
+        width: 100%;
+        display: block;
+      }
+
+      figcaption {
+        padding: 10px 12px;
+        color: var(--muted);
+        font-size: 14px;
+      }
+
+      pre {
+        overflow-x: auto;
+        padding: 16px;
+        border-radius: 8px;
+        background: #0f1720;
+        color: #eaf2ff;
+        font-size: 13px;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 14px 0 28px;
+        font-size: 15px;
+      }
+
+      th,
+      td {
+        padding: 10px 12px;
+        border-bottom: 1px solid var(--line);
+        text-align: left;
+      }
+
+      th {
+        background: var(--soft);
+      }
+
+      footer {
+        padding: 44px 24px;
+        color: var(--muted);
+      }
+
+      @media (max-width: 760px) {
+        nav {
+          align-items: flex-start;
+          flex-direction: column;
+          padding-top: 16px;
+          padding-bottom: 16px;
+        }
+
+        .metrics,
+        .figures {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <nav>
+        <strong>GUI State Compression</strong>
+        <div>
+          <a href="https://github.com/sauravtom/gui-state-compression">GitHub</a>
+          &nbsp;&nbsp;
+          <a href="paper.pdf">Paper PDF</a>
+          &nbsp;&nbsp;
+          <a href="results/summary.csv">Results CSV</a>
+        </div>
+      </nav>
+      <section class="hero">
+        <h1>Keyframes and semantic deltas for cheaper computer-use agents.</h1>
+        <p class="subtitle">
+          A workshop-scale research prototype testing whether GUI agents can avoid resending
+          full screenshots and full UI histories at every step.
+        </p>
+        <div class="actions">
+          <a class="button" href="paper.pdf">Read the paper draft</a>
+          <a class="button secondary" href="https://github.com/sauravtom/gui-state-compression">View code</a>
+        </div>
+      </section>
+    </header>
+
+    <main>
+      <section class="metrics" aria-label="Main result metrics">
+        <div class="metric">
+          <strong>52.5%</strong>
+          <span>input-token reduction for hybrid K=4 versus full context</span>
+        </div>
+        <div class="metric">
+          <strong>1.92x</strong>
+          <span>compression ratio on the default 40-task benchmark</span>
+        </div>
+        <div class="metric">
+          <strong>90.0%</strong>
+          <span>hybrid success rate under deterministic simulated policy</span>
+        </div>
+        <div class="metric">
+          <strong>253 ms</strong>
+          <span>average simulated latency per step for hybrid K=4</span>
+        </div>
+      </section>
+
+      <section>
+        <h2>Core Idea</h2>
+        <p>
+          GUI trajectories are temporally redundant. Instead of sending a complete screenshot,
+          DOM tree, accessibility tree, OCR text, and full history at every step, the agent can
+          use a previous keyframe plus compact deltas.
+        </p>
+        <pre>GUI(t) = Keyframe(t-k) + DeltaUI(t-k+1 ... t)</pre>
+      </section>
+
+      <section>
+        <h2>Default Results</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Method</th>
+              <th>Success</th>
+              <th>Avg input tokens</th>
+              <th>Latency/step</th>
+              <th>Compression</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Full context</td><td>100.0%</td><td>6061.8</td><td>329.7 ms</td><td>1.00x</td></tr>
+            <tr><td>Hybrid K=4</td><td>90.0%</td><td>2877.2</td><td>253.5 ms</td><td>1.92x</td></tr>
+            <tr><td>Pixel delta K=4</td><td>75.0%</td><td>2411.6</td><td>246.8 ms</td><td>2.08x</td></tr>
+            <tr><td>Semantic delta K=4</td><td>87.5%</td><td>2699.9</td><td>249.8 ms</td><td>1.99x</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section>
+        <h2>Figures</h2>
+        <div class="figures">
+          <figure>
+            <img src="assets/tokens_success_by_method.png" alt="Token use and success by method">
+            <figcaption>Token use and success by method.</figcaption>
+          </figure>
+          <figure>
+            <img src="assets/success_vs_compression_ratio.png" alt="Success versus compression ratio">
+            <figcaption>Success versus compression ratio.</figcaption>
+          </figure>
+          <figure>
+            <img src="assets/latency_by_method.png" alt="Latency by method">
+            <figcaption>Simulated latency by method.</figcaption>
+          </figure>
+          <figure>
+            <img src="assets/failure_categories.png" alt="Failure categories">
+            <figcaption>Failure categories from the synthetic benchmark.</figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section>
+        <h2>Citation</h2>
+        <pre>@misc{tom2026guistatecompression,
+  title = {GUI State Compression for Computer-Use Agents Using Keyframes and Delta Encoding},
+  author = {Tom, Saurav},
+  year = {2026},
+  url = {https://github.com/sauravtom/gui-state-compression},
+  note = {Workshop prototype preprint and code release}
+}</pre>
+      </section>
+    </main>
+
+    <footer>
+      Built from the repository artifacts: code, benchmark results, figures, and paper draft.
+    </footer>
+  </body>
+</html>
