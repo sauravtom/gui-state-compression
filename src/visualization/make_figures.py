@@ -20,6 +20,22 @@ def _method_label(row: Dict[str, str]) -> str:
     return str(method)
 
 
+def _latex_escape(text: str) -> str:
+    replacements = {
+        "\\": r"\textbackslash{}",
+        "&": r"\&",
+        "%": r"\%",
+        "$": r"\$",
+        "#": r"\#",
+        "_": r"\_",
+        "{": r"\{",
+        "}": r"\}",
+        "~": r"\textasciitilde{}",
+        "^": r"\textasciicircum{}",
+    }
+    return "".join(replacements.get(char, char) for char in text)
+
+
 def make_figures(summary_csv: str | Path, task_csv: str | Path, output_dir: str | Path) -> None:
     import matplotlib.pyplot as plt
 
@@ -86,8 +102,9 @@ def make_figures(summary_csv: str | Path, task_csv: str | Path, output_dir: str 
         handle.write("\\begin{tabular}{lrrrr}\\toprule\n")
         handle.write("Method & Success & Input tok. & Latency & Ratio \\\\\n\\midrule\n")
         for row in summary:
+            method = _latex_escape(_method_label(row).replace(chr(10), " "))
             handle.write(
-                f"{_method_label(row).replace(chr(10), ' ')} & "
+                f"{method} & "
                 f"{float(row['success_rate']) * 100:.1f}\\% & "
                 f"{float(row['avg_input_tokens']):.0f} & "
                 f"{float(row['avg_latency_ms']):.0f} & "

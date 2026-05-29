@@ -27,5 +27,7 @@ The code and benchmark artifacts are available at:
 https://github.com/sauravtom/gui-state-compression
 EOF
 
-tar -C "$ROOT/dist/arxiv" -czf "$ARCHIVE" gui-state-compression
+# Build a flat source archive. COPYFILE_DISABLE prevents macOS AppleDouble
+# metadata entries (._*) from entering the tarball.
+(cd "$OUT_DIR" && COPYFILE_DISABLE=1 tar -czf "$ARCHIVE" main.tex references.bib README.txt figures)
 echo "Wrote $ARCHIVE"
