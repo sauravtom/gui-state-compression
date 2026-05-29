@@ -182,7 +182,7 @@ Then reuse `DeltaEncoder`, prompt builders, and the metrics writer.
 ```bibtex
 @misc{tom2026guistatecompression,
   title = {GUI State Compression for Computer-Use Agents Using Keyframes and Delta Encoding},
-  author = {Tom, Saurav},
+  author = {Tomar, Saurav},
   year = {2026},
   url = {https://github.com/sauravtom/gui-state-compression},
   note = {Workshop prototype preprint and code release}

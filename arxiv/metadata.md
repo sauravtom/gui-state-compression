@@ -4,7 +4,7 @@ Title:
 GUI State Compression for Computer-Use Agents Using Keyframes and Delta Encoding
 
 Authors:
-Saurav Tom
+Saurav Tomar
 
 Suggested primary category:
 cs.AI

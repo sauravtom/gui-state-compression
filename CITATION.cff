@@ -2,7 +2,7 @@ cff-version: 1.2.0
 message: "If you use this prototype, please cite it as below."
 title: "GUI State Compression for Computer-Use Agents Using Keyframes and Delta Encoding"
 authors:
-  - family-names: "Tom"
+  - family-names: "Tomar"
     given-names: "Saurav"
 date-released: "2026-05-29"
 version: "0.1.0"
@@ -12,7 +12,7 @@ preferred-citation:
   type: article
   title: "GUI State Compression for Computer-Use Agents Using Keyframes and Delta Encoding"
   authors:
-    - family-names: "Tom"
+    - family-names: "Tomar"
       given-names: "Saurav"
   year: 2026
   notes: "Workshop prototype preprint and code release."
